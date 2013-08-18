@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.025" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -1345,19 +1345,19 @@ Pin 3 - Input&lt;/p&gt;</description>
 <part name="J2" library="tidyeagle" deviceset="J03" device="-LONG" value="POT"/>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
 <part name="P+4" library="supply1" deviceset="+5V" device=""/>
-<part name="IC3" library="tidyeagle" deviceset="VREG-3PIN" device="-IGO-TO220-HORZ-DRILL" value="7805"/>
-<part name="C3" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-5MM"/>
-<part name="C4" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-5MM"/>
-<part name="C5" library="tidyeagle" deviceset="CAPACITOR" device="-TH-5MM"/>
+<part name="IC3" library="tidyeagle" deviceset="VREG-3PIN" device="-IGO-TO220-HORZ-DRILL" value="MCP1826S-5V"/>
+<part name="C3" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-5MM" value="22uF"/>
+<part name="C4" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-5MM" value="220uF"/>
+<part name="C5" library="tidyeagle" deviceset="CAPACITOR" device="-TH-5MM" value="10nF"/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="D1" library="tidyeagle" deviceset="DIODE-BRIDGE-RECTIFIER" device="-DB101G" value="DB101G"/>
 <part name="J3" library="tidyeagle" deviceset="J02" device="-LONG" value="SINE"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
-<part name="C6" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-5MM"/>
+<part name="C6" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-5MM" value="220uF"/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
-<part name="C7" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-10MM"/>
+<part name="C7" library="tidyeagle" deviceset="CAPACITOR-POLARISED" device="-TH-10MM" value="470uF"/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="P+3" library="supply1" deviceset="+5V" device=""/>
 <part name="J4" library="tidyeagle" deviceset="J03" device="-NOSILK" value="SPARES"/>
