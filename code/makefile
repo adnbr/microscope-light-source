@@ -10,7 +10,7 @@ OPTIMIZE       = -Os
 DEFS           =
 LIBS           =
 
-HZ          = 9600000
+HZ             = 9600000
 
 # You should not have to change anything below here.
 

@@ -17,6 +17,8 @@
 // Define led ext output pin on PB2
 #define LED PB1 
 
+#define OFF_BELOW 20
+
 int led_brightness;
 
 int main(void)
@@ -24,7 +26,7 @@ int main(void)
     // LED is an output.
     DDRB |= (1 << LED);
     
-    // ADC CODE
+    // ADC setup code
     // -----------------------------------------------------------------
     
     // Set ADC prescaler to clock/128.
@@ -38,13 +40,14 @@ int main(void)
     ADCSRA |= (1 >> ADATE) | (1 << ADEN);
 
     // Start ADC conversions.
-    ADCSRA |= (1 << ADSC) | (1 << ADIF); 
+    ADCSRA |= (1 << ADSC); 
     
-    // PWM CODE
+    // PWM setup code
     // -----------------------------------------------------------------
     
-    // Set Timer 0 prescaler to clock/8
-    TCCR0B |= (1 << CS00);
+    // Set Timer 0 prescaler to clock/64.
+    // At 9.6 MHz this is 150 kHz.
+    TCCR0B |= (1 << CS01) | (1 << CS00);
     
     // Set to 'Fast PWM' mode
     TCCR0A |= (1 << WGM01) | (1 << WGM00);
@@ -54,21 +57,19 @@ int main(void)
     // Set PWM to 0 brightness.
     OCR0B = 0;
     
-    
-    
     // Infinite loop
     while (1) {
-
         // Get the latest ADC reading
         led_brightness = ADCH;
         
         // We want an "off" position to supplement the physical off
         // power switch we added. This range roughly matches the "off" 
         // position on the original intensity control knob.
-        if (led_brightness <= 20) {
+        if (led_brightness <= OFF_BELOW) {
             led_brightness = 0;
         }
         
+        // Update the PWM.
         OCR0B = led_brightness;
     }
 }
