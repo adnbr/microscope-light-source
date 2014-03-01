@@ -83,7 +83,7 @@ int main (void)
         // ADC input is quite noisy, needs calming down.
         brightness = (brightness - (brightness / 4)) + (adc_in / 4);
 
-		if (brightness < OFF_BELOW) {
+        if (brightness < OFF_BELOW) {
             pwm_write(0);
         } else {
             pwm_write(brightness);
