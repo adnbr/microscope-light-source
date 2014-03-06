@@ -5,6 +5,8 @@
  * Pin configuration -
  * PB1/OC0B: LED output (Pin 6)
  * PB2/ADC1: Potentiometer input (Pin 7)
+
+ * ~712 bytes.
  * 
  * Find out more: http://bit.ly/1d51tgB
  * -------------------------------------------------------------------*/
@@ -17,6 +19,12 @@
 #define OFF_BELOW 25
 
 #include <avr/io.h>
+
+// Map from Arduino, see http://arduino.cc/en/reference/map
+long map(long x, long in_min, long in_max, long out_min, long out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 void adc_setup (void)
 {
@@ -54,7 +62,7 @@ void pwm_setup (void)
     TCCR0A |= (1 << WGM01) | (1 << WGM00);
 
     // Clear OC0B output on compare match, upwards counting.
-    TCCR0A |= (1 << COM0B1);
+    TCCR0A |= (1 << COM0B0) | (1 << COM0B1);
 }
 
 void pwm_write (int val)
@@ -66,9 +74,6 @@ int main (void)
 {
     int brightness = 0;
     int adc_in = 0;
-
-    // LED is an output.
-    DDRB |= (1 << LED);  
 
     adc_setup();
     pwm_setup();
@@ -84,9 +89,13 @@ int main (void)
         brightness = (brightness - (brightness / 4)) + (adc_in / 4);
 
         if (brightness < OFF_BELOW) {
+        	// Turn off LED.
+        	DDRB &= ~(1 << LED);
             pwm_write(0);
         } else {
-            pwm_write(brightness);
+        	// LED is output, set PWM brightness.
+        	DDRB |= (1 << LED);  
+            pwm_write(map(brightness, OFF_BELOW, 255, 255, 0));
         }
     }
 }
